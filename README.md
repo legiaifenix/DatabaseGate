@@ -14,12 +14,15 @@ You will be creating arrays with keys that will navigate through your DB and fet
 
 ##Instalation
 To start using the package, two steps are needed.
+
 **1.** Require the package in CMD by running following command:
+
 ```
     composer require legiaifenix/databasegate
 ```
 
 Or add it to your composer.json file in the "required" field:
+
 ```
     "require": {
             ...
@@ -28,6 +31,7 @@ Or add it to your composer.json file in the "required" field:
 ```
 
 **2.** To start using it in your Controllers/Services/Classes just inject the class where you need it!
+
 ```
     public function reallyNeedToSortThis(DatabaseService $databaseService)
     {
@@ -49,6 +53,7 @@ See below documentation to know how to access your table and sort your searches!
 ```
 
 ##Getting products for each client
+
 Lets assume you got the products in "products" table and clients in "clients" table;
 
 ```
@@ -97,6 +102,7 @@ Lets assume you got the products in "products" table and clients in "clients" ta
 ```
 
 ##Getting all products that are visible
+
 When you target only one table (what I like to consider the main table for all searches) you dont need to specify the select
 unless you just need a few columns from it. It depends of the value and columns you use for your logic.
 
@@ -111,6 +117,7 @@ unless you just need a few columns from it. It depends of the value and columns 
 ```
 
 ##Sum the cost of all products of the client with "example@email.com" and get their email
+
 We will be adding all the products price of the client with the "example@email.com" email
 and name that column "totalCost" to use it in the views
 
@@ -137,7 +144,9 @@ In the view we can use the object as:
     Total Cost: {{$results->totalCost}}
 ```
 
-##If you wish just to have the cost you dont need to provide the select, you can deploy your array of conditions to just
+##Sum all that info!
+
+If you wish just to have the cost you don't need to provide the select, you can deploy your array of conditions to just
 return the added value
 
 ```
