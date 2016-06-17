@@ -12,6 +12,33 @@ Through it they can call in any service/controller they desire and make use of t
 
 You will be creating arrays with keys that will navigate through your DB and fetch the desire information
 
+##Instalation
+To start using the package, two steps are needed.
+**1.** Require the package in CMD by running following command:
+```
+    composer require legiaifenix/databasegate
+```
+
+Or add it to your composer.json file in the "required" field:
+```
+    "require": {
+            ...
+            "legiaifenix/databasegate": "*"
+        },
+```
+
+**2.** To start using it in your Controllers/Services/Classes just inject the class where you need it!
+```
+    public function reallyNeedToSortThis(DatabaseService $databaseService)
+    {
+        return $databaseService->getEntriesOfTableWithConditions($yourDesiredTable, $yourConditions);
+    }
+```
+
+See below documentation to know how to access your table and sort your searches!
+
+
+
 ##Geting total products in products table
 ```
     $conditions = [
