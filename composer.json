@@ -2,6 +2,7 @@
     "name": "legiaifenix/databasegate",
     "description": "Laravel database manager to help make it more structural and visually logical to developers",
     "license": "MIT",
+    "version": "0.0.1",
     "authors": [
         {
             "name": "Legiai Fenix",
@@ -13,7 +14,6 @@
           "database"
       ],
       "psr-4": {
-          "App\\": "app/",
           "LegiaiFenix\\DatabaseGate\\": "src"
       }
     },
