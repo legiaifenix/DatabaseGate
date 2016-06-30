@@ -4,7 +4,9 @@
 **Frameworks:** Laravel 5.*
 **License:** MIT
 
-**Supported functionality:** select, sum, count, paginate, join, leftJoin, where, group,
+**Supported functionality:** select, join, leftJoin, where, orWhere, whereBetween, group, sum, count, paginate
+
+**Future Support:** Delete, Update, Insert clauses
 
 This is a small package to help boost laravel development. Its objective is to simplify the use of database tables in
 order to minimize the written code and create a visual way to help developers understand the queries they are building.
@@ -162,3 +164,28 @@ return the added value
 
     $results = $databaseGate->getEntriesOfTableWithConditions('products', $conditions);
 ```
+
+##Need prices between 30 and 70!
+
+Well no problem, let us start by the example.
+
+```
+    $conditions = [
+                'join' => [
+                    'clients' => ['clients.id', '=', 'products.client_id']
+                ],
+                'where' => [
+                    ['clients.email', '=', 'example@email.com']
+                ],
+                'whereBetween' => [
+                    'price' => ['30', '70']
+                ],
+                'sum' => 'products.price'
+            ];
+
+        $results = $databaseGate->getEntriesOfTableWithConditions('products', $conditions);
+
+```
+
+Just like the Joins, you can add more arrays to specify even more where between clauses. The header that guides the arrays of values
+are, of course, the col names that own the comparison.

@@ -14,7 +14,7 @@ use Illuminate\Database\DatabaseManager;
 
 class DatabaseService
 {
-    protected $eventsKeys = ['select', 'sum', 'count', 'paginate', 'join', 'leftJoin', 'where', 'group'];
+    protected $eventsKeys = ['select', 'join', 'leftJoin', 'where', 'orWhere', 'whereBetween', 'group', 'sum', 'count', 'paginate'];
 
     protected $activeVal = 1;
     /**
@@ -53,6 +53,10 @@ class DatabaseService
 
             if( array_key_exists('where', $conditions) || array_key_exists('orWhere', $conditions) ) {
                 $query = $this->handlesWheres($query, $conditions);
+            }
+
+            if( array_key_exists('whereBetween', $conditions) ){
+                $query = $this->handlesWhereBetween($query, $conditions);
             }
 
             if( array_key_exists('join', $conditions) ){
@@ -97,6 +101,25 @@ class DatabaseService
             return false;
         }
 
+    }
+
+    private function handlesWhereBetween($query, $conditions)
+    {
+        if( is_array($conditions['whereBetween']) && count($conditions['whereBetween']) > 0 ) {
+            foreach ($conditions['whereBetween'] as $key => $value) {
+                if( count($value) > 2 ) {
+                    $query = $query->whereBetween(
+                        $key,
+                        [
+                            $value[0],
+                            $value[1]
+                        ]
+                    );
+                }
+            }
+        }
+
+        return $query;
     }
 
     private function handlesHaving($query, $conditions)
