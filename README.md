@@ -189,3 +189,31 @@ Well no problem, let us start by the example.
 
 Just like the Joins, you can add more arrays to specify even more where between clauses. The header that guides the arrays of values
 are, of course, the col names that own the comparison.
+
+##What about Having and its rainbow magic?!
+
+Chill my friend, having is inserted, as well, to save the day!
+
+Here is an example of how you can use it to save your day! It definitely saved mine!
+
+```
+    $conditions = [
+                    'join' => [
+                        'clients' => ['clients.id', '=', 'products.client_id']
+                    ],
+                    'where' => [
+                        ['clients.email', '=', 'example@email.com']
+                    ],
+                    'having' => [
+                        ["sum(orders.cost) = $value or sum(orders.q) = $value"]
+                    ],
+                    'sum' => 'products.price'
+                ];
+
+            $results = $databaseGate->getEntriesOfTableWithConditions('products', $conditions);
+
+```
+
+Yes you guess it well! It is only supporting a Raw Having query, but is not like it is so hard it broke your fellings, right?
+Anyhow I will be adding the queries outputs later on to help you debug them if needed or creating a deeper understanding of
+how does it exactly works.

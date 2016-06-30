@@ -2,7 +2,7 @@
     "name": "legiaifenix/databasegate",
     "description": "Laravel database manager to help make it more structural and visually logical to developers",
     "license": "MIT",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "authors": [
         {
             "name": "Legiai Fenix",

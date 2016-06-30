@@ -14,7 +14,7 @@ use Illuminate\Database\DatabaseManager;
 
 class DatabaseService
 {
-    protected $eventsKeys = ['select', 'join', 'leftJoin', 'where', 'orWhere', 'whereBetween', 'group', 'sum', 'count', 'paginate'];
+    protected $eventsKeys = ['select', 'join', 'leftJoin', 'where', 'orWhere', 'whereBetween', 'group', 'having', 'sum', 'count', 'paginate'];
 
     protected $activeVal = 1;
     /**
@@ -136,7 +136,6 @@ class DatabaseService
     private function handlesPagination($query, $conditions)
     {
         if( is_array($conditions['paginate']) && count($conditions['paginate']) > 1 ){
-            dd($conditions['paginate'][0]);
             return $query->skip( ($conditions['paginate'][0] * $conditions['paginate'][1]) )->take($conditions['paginate'][0]);
         } else {
             return $query->paginate($conditions['paginate']);
