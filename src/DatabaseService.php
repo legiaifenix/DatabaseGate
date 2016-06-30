@@ -136,7 +136,7 @@ class DatabaseService
     private function handlesPagination($query, $conditions)
     {
         if( is_array($conditions['paginate']) && count($conditions['paginate']) > 1 ){
-            return $query->skip( ($conditions['paginate'][0] * $conditions['paginate'][1]) )->take($conditions['paginate'][0]);
+            return $query->skip( ($conditions['paginate'][0] * $conditions['paginate'][1]) )->take($conditions['paginate'][0])->get();
         } else {
             return $query->paginate($conditions['paginate']);
         }

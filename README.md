@@ -217,3 +217,21 @@ Here is an example of how you can use it to save your day! It definitely saved m
 Yes you guess it well! It is only supporting a Raw Having query, but is not like it is so hard it broke your fellings, right?
 Anyhow I will be adding the queries outputs later on to help you debug them if needed or creating a deeper understanding of
 how does it exactly works.
+
+#Custom Pagination
+
+You can implement your own target of rows through a custom pagination. Is not that different from pagination itself.
+All you have to do is substitute the single value by an array of 2 values, being them [skip, amount].
+
+So, let us simulate we want 25 results corresponding to page 3:
+
+```
+    $conditions = [
+            ...
+            'pagination' = ['3', '25']
+            ];
+
+```
+
+That is it! Enjoy your custom pagination methods! Of course try to implement the page and amount of results in a dynamic way, not static as this example.
+Damm who does this examples?
