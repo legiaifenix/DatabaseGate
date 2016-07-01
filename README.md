@@ -235,3 +235,8 @@ So, let us simulate we want 25 results corresponding to page 3:
 
 That is it! Enjoy your custom pagination methods! Of course try to implement the page and amount of results in a dynamic way, not static as this example.
 Damm who does this examples?
+
+##Debug my queries
+
+Okay I know this is a sensible field, so I am implementing query debugging slowly, but surely!
+For now we are able to see almost the entire query until it reaches the final statements like

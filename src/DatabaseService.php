@@ -41,7 +41,7 @@ class DatabaseService
      * @param array $conditions
      * @return mixed
      */
-    public function getEntriesOfTableWithConditions($targetTable, Array $conditions)
+    public function getEntriesOfTableWithConditions($targetTable, Array $conditions, $debug = false)
     {
         if( is_array($conditions) ) {
             $query = $this->db->table( strtolower($targetTable) );
@@ -81,6 +81,10 @@ class DatabaseService
                 }
             }
 
+            if( $debug ){
+                return $query->toSql();
+            }
+
 
             if( array_key_exists("count", $conditions) ){
                 return $query->count();
@@ -107,7 +111,7 @@ class DatabaseService
     {
         if( is_array($conditions['whereBetween']) && count($conditions['whereBetween']) > 0 ) {
             foreach ($conditions['whereBetween'] as $key => $value) {
-                if( count($value) > 2 ) {
+                if( count($value) > 1 ) {
                     $query = $query->whereBetween(
                         $key,
                         [
@@ -188,7 +192,7 @@ class DatabaseService
                     }
                     );
                 }
-             }
+            }
         }
 
         return $query;
