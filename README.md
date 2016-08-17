@@ -229,7 +229,7 @@ So, let us simulate we want 25 results corresponding to page 3:
     $conditions = [
             ...
             'pagination' = ['3', '25']
-            ];
+    ];
 
 ```
 
@@ -238,5 +238,105 @@ Damm who does this examples?
 
 ##Debug my queries
 
-Okay I know this is a sensible field, so I am implementing query debugging slowly, but surely!
-For now we are able to see almost the entire query until it reaches the final statements like
+V.0.1.3 included a debug for select queries. This are the ones that can get more complex and not totally straight forward. 
+There for the necessity to debug them is immense. To start debugging them you can just add a true as boolean at the end of the calls.
+
+Ex:. 
+**Condition example**
+```
+                $conditions = [
+                    'select' => [
+                        ['colors.*']
+                    ],
+                    'order' => ['color_name', 'ASC']
+                ];
+```
+
+```
+    $results = $this->databaseGate->getEntriesOfTableWithConditions('colors', $conditions, true);
+    var_dump($results);
+```
+
+**Output**
+```
+    select colors.* from `colors` order by `color_name` asc
+```
+
+**Debug example with joins**
+```
+            $conditions = [
+                'select' => [
+                    ['products_colors.*'],
+                    ['colors']
+                ],
+                'joins' => [
+                    'colors' => ['colors.id', '=', 'products_colors.color_id']
+                ],
+                'where' => [
+                    ['colors.color_name', '=', 'test']
+                ],
+                'order' => ['color_name', 'ASC']
+            ];
+```
+
+**Output**
+```
+    select products_colors.*,colors from `products_colors` where `colors`.`color_name` = ? order by `color_name` asc
+```
+
+#Delete Query
+
+if you wish to delete entries from your database, you sure know that Laravel provides that option and even more!
+For the time being I just allowed to delete permanently. Later intend to add the soft deletes.
+ 
+ **Condition example**
+```
+            $conditions = [
+                'delete' => [
+                    'permanent'    
+                ],
+                'where' => [
+                    ['col', '=', '<title>']
+                ]
+            ];     
+```
+
+The delete is already an array to accommodate the later changes which will have the soft deletes.
+For now use it as it is displayed.
+
+#Inserts
+
+This insert will return the new id inserted in the database. So you can have an object or variable expecting it.
+
+**Condition example**
+```
+            $conditions = [
+                'insert' => [
+                    'title' => 'test', 
+                    'price' => '33.33', 
+                    'other col here' => 'other value here' 
+                ]
+            ];     
+```
+
+```
+    $id = $this->databaseGate->getEntriesOfTableWithConditions('<table name>', $conditions);
+    var_dump($results);
+```
+
+#Update Information
+
+```
+        $conditions = [
+            'update' => [
+                'title' => 'Title1',
+                'desc' => 'description here'
+            ],
+            'where' => [
+                ['title', '=', 'what I want to change']
+            ]
+        ];
+       
+        $this->databaseGate->getEntriesOfTableWithConditions('table name', $conditions);
+```
+ 
