@@ -267,7 +267,7 @@ Ex:.
             $conditions = [
                 'select' => [
                     ['products_colors.*'],
-                    ['colors']
+                    ['colors.*']
                 ],
                 'joins' => [
                     'colors' => ['colors.id', '=', 'products_colors.color_id']
@@ -281,7 +281,7 @@ Ex:.
 
 **Output**
 ```
-    select products_colors.*,colors from `products_colors` where `colors`.`color_name` = ? order by `color_name` asc
+    select products_colors.*,colors.* from `products_colors` where `colors`.`color_name` = ? order by `color_name` asc
 ```
 
 #Delete Query
