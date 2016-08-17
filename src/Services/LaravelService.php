@@ -1,5 +1,5 @@
 <?php
-namespace LegiaiFenix\Services;
+namespace LegiaiFenix\DatabaseGate\Services;
 
 
 use Illuminate\Database\DatabaseManager;

@@ -11,7 +11,7 @@ namespace LegiaiFenix\DatabaseGate;
 use Illuminate\Contracts\Logging\Log;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
-use LegiaiFenix\Services\LaravelService;
+use LegiaiFenix\DatabaseGate\Services\LaravelService;
 
 class DatabaseService
 {
