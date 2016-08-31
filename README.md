@@ -4,9 +4,9 @@
 **Frameworks:** Laravel 5.*
 **License:** MIT
 
-**Supported functionality:** select, join, leftJoin, where, orWhere, whereBetween, group, sum, count, paginate
+**Supported functionality:** select, join, leftJoin, where, orWhere, whereBetween, group, sum, count, paginate, delete, update, insert
 
-**Future Support:** Delete, Update, Insert clauses
+**Future Support:** PDO
 
 This is a small package to help boost laravel development. Its objective is to simplify the use of database tables in
 order to minimize the written code and create a visual way to help developers understand the queries they are building.
@@ -71,6 +71,30 @@ Lets assume you got the products in "products" table and clients in "clients" ta
     ];
 
     $results = $databaseGate->getEntriesOfTableWithConditions('clients', $conditions);
+```
+
+##Left Joins
+
+Thanks to Joao Cunha I was able to remember that LEft Joins are missing. So here goes a new implementation of it.
+They work exactly like right joins, but they are left. Mind blow.
+Left joins will fetch the conjunction regardless if there are values or not. While right joins will only fetch rows that do not miss
+in their search. We are not oblige to own rows every time we do a search, right?
+
+Here we go:
+
+```
+    $conditions = [
+            'select' => [
+                ['clients.name'],
+                ['clients.email'],
+                ['products.*']
+            ],
+            'leftJoin' => [
+                'products' => ['products.client_id', '=', 'clients.id']
+            ]
+        ];
+    
+        $results = $databaseGate->getEntriesOfTableWithConditions('clients', $conditions);
 ```
 
 ##If you wish to paginate your queries by 5 per page

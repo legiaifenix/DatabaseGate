@@ -82,7 +82,7 @@ class LaravelService
                 $query = $this->handlesWhereBetween($query, $conditions);
             }
 
-            if( array_key_exists('join', $conditions) ){
+            if( array_key_exists('join', $conditions) || array_key_exists('leftJoin', $conditions) ){
                 $query = $this->handlesJoins($query, $conditions);
             }
 
@@ -266,6 +266,19 @@ class LaravelService
             foreach ($joins['join'] as $key => $value) {
                 if( count($value) > 2 ) {
                     $query = $query->join(
+                        $key,
+                        $value[0],
+                        $value[1],
+                        $value[2]
+                    );
+                }
+            }
+        }
+
+        if( is_array($joins['leftJoin']) && count($joins['leftJoin']) > 0 ) {
+            foreach ($joins['leftJoin'] as $key => $value) {
+                if( count($value) > 2 ) {
+                    $query = $query->leftJoin(
                         $key,
                         $value[0],
                         $value[1],
