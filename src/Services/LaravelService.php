@@ -262,31 +262,37 @@ class LaravelService
      */
     private function handlesJoins($query, $joins)
     {
-        if( is_array($joins['join']) && count($joins['join']) > 0 ) {
-            foreach ($joins['join'] as $key => $value) {
-                if( count($value) > 2 ) {
-                    $query = $query->join(
-                        $key,
-                        $value[0],
-                        $value[1],
-                        $value[2]
-                    );
+        if( array_key_exists('join', $joins) ) {
+            if( is_array($joins['join']) && count($joins['join']) > 0 ) {
+                foreach ($joins['join'] as $key => $value) {
+                    if( count($value) > 2 ) {
+                        $query = $query->join(
+                            $key,
+                            $value[0],
+                            $value[1],
+                            $value[2]
+                        );
+                    }
                 }
             }
         }
 
-        if( is_array($joins['leftJoin']) && count($joins['leftJoin']) > 0 ) {
-            foreach ($joins['leftJoin'] as $key => $value) {
-                if( count($value) > 2 ) {
-                    $query = $query->leftJoin(
-                        $key,
-                        $value[0],
-                        $value[1],
-                        $value[2]
-                    );
+
+        if( array_key_exists('leftJoin', $joins) ) {
+            if( is_array($joins['leftJoin']) && count($joins['leftJoin']) > 0 ) {
+                foreach ($joins['leftJoin'] as $key => $value) {
+                    if( count($value) > 2 ) {
+                        $query = $query->leftJoin(
+                            $key,
+                            $value[0],
+                            $value[1],
+                            $value[2]
+                        );
+                    }
                 }
             }
         }
+
 
 
         return $query;
