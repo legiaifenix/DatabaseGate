@@ -12,6 +12,7 @@ use Illuminate\Contracts\Logging\Log;
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
 use LegiaiFenix\DatabaseGate\Services\LaravelService;
+use LegiaiFenix\DatabaseGate\Services\PDOService;
 
 class DatabaseService
 {
@@ -33,6 +34,7 @@ class DatabaseService
     protected $statements;
 
     protected $laravel;
+    protected $pdo;
 
     public function __construct(DatabaseManager $db, Log $log, LaravelService $laravel)
     {
@@ -46,7 +48,8 @@ class DatabaseService
                 return $this->laravel->laravelFacade($targetTable, $conditions, $debug);
             },
             'pdo' => function($targetTable, $conditions, $debug) {
-                return "pdo";
+                $this->pdo = new PDOService();
+                return $this->pdo->pdoFacade($targetTable, $conditions, $debug);
             }
         ];
     }
@@ -65,7 +68,8 @@ class DatabaseService
         if( $type == 'laravel' ){
             return $this->laravel->laravelFacade($targetTable, $conditions, $debug);
         } else if( $type == "pdo" ){
-            return "not yet implemented";
+            $this->pdo = new PDOService();
+            return $this->pdo->pdoFacade($targetTable, $conditions, $debug);
         }
     }
 

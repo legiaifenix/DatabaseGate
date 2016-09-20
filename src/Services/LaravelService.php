@@ -59,8 +59,6 @@ class LaravelService
         } else {
             return $this->selectFacade($targetTable, $conditions, $debug);
         }
-
-        return "false";
     }
 
     /* SELECT LOGIC */
