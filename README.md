@@ -1,6 +1,6 @@
 #Legiai Fenix DatabaseGate
 
-**Version:** 1.0
+**Version:** 0.1.8
 **Frameworks:** Laravel 5.*
 **License:** MIT
 
@@ -42,6 +42,10 @@ Or add it to your composer.json file in the "required" field:
 ```
 
 See below documentation to know how to access your table and sort your searches!
+
+**Note:** The package now considers a SELECT when no order of the major logics is provided.
+For example, if oyu had joins, wheres and any other clause that does not fall in the category of major logic (SELECT, UPDATE, DELETE or INSERT)
+it will grab your conditions and execute a SELECT as default.
 
 
 

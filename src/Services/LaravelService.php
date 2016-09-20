@@ -45,9 +45,7 @@ class LaravelService
      */
     public function laravelFacade($targetTable, Array $conditions, $debug = false)
     {
-        if( array_key_exists('select', $conditions) ) {
-            return $this->selectFacade($targetTable, $conditions, $debug);
-        } else if( array_key_exists('update', $conditions) ) {
+        if( array_key_exists('update', $conditions) ) {
 
             return $this->updateFacade($targetTable, $conditions);
         } else if( array_key_exists('increments', $conditions) || array_key_exists('decrements', $conditions) ) {
@@ -58,6 +56,8 @@ class LaravelService
             return $this->insertFacade($targetTable, $conditions);
         } else if( array_key_exists('delete', $conditions) ) {
             return $this->deleteFacade($targetTable, $conditions);
+        } else {
+            return $this->selectFacade($targetTable, $conditions, $debug);
         }
 
         return "false";
